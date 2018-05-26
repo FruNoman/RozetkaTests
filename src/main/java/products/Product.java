@@ -5,4 +5,6 @@ public interface Product {
     String getName();
     void setPrice(String price);
     String getPrice();
+    boolean getPopular();
+    void setPopular(boolean popular);
 }

@@ -3,15 +3,23 @@ import enums.SubCategories;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.testng.annotations.*;
 import pages.MainPage;
 import pages.SubCategoryPage;
+import products.Product;
+import utils.FileUtils;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
+
+import static sun.audio.AudioDevice.device;
 
 public class BaseTest {
     protected WebDriver driver;
+    protected List<Product> products;
 
     @BeforeClass
     public void init(){
@@ -19,7 +27,7 @@ public class BaseTest {
         DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
         driver = new ChromeDriver(desiredCapabilities);
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
 
     @BeforeMethod
@@ -28,16 +36,18 @@ public class BaseTest {
     }
 
     @Test
-    public void testOne() throws InterruptedException {
+    public void testOne() throws InterruptedException, IOException {
         MainPage mainPage = new MainPage(driver);
         mainPage.hoverOnCategory(Categories.SMARTPHONES_AND_TV);
         mainPage.clickOnSubCategory(SubCategories.SMARTPHONES);
         SubCategoryPage subCategoryPage = new SubCategoryPage(driver);
         subCategoryPage.clickOnMoreButton(3);
+        products=subCategoryPage.collectAllProducts();
     }
 
     @AfterClass
-    public void tearDown(){
-//        driver.close();
+    public void tearDown() throws IOException {
+        FileUtils.writeProductToFile(products);
+        driver.close();
     }
 }
