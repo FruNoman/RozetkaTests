@@ -8,7 +8,9 @@ import pages.MainPage;
 import pages.SubCategoryPage;
 import products.Product;
 import utils.FileUtils;
+import utils.MailSender;
 
+import javax.mail.MessagingException;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -36,7 +38,7 @@ public class BaseTest {
     }
 
     @Test
-    public void testOne() throws InterruptedException, IOException {
+    public void testOne() throws InterruptedException {
         MainPage mainPage = new MainPage(driver);
         mainPage.hoverOnCategory(Categories.SMARTPHONES_AND_TV);
         mainPage.clickOnSubCategory(SubCategories.SMARTPHONES);
@@ -46,8 +48,10 @@ public class BaseTest {
     }
 
     @AfterClass
-    public void tearDown() throws IOException {
-        FileUtils.writeProductToFile(products);
+    public void tearDown() throws IOException, MessagingException {
+        File describeFile=FileUtils.writeProductToFile(products);
+        MailSender mailSender = new MailSender();
+        mailSender.sendMail(describeFile);
         driver.close();
     }
 }

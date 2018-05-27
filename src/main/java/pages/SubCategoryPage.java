@@ -28,8 +28,8 @@ public class SubCategoryPage extends BasePage {
     }
 
     public void clickOnMoreButton(int count) throws InterruptedException {
-        for(int i=0;i<count;i++){Thread.sleep(3000);
-            new WebDriverWait(driver, 10).until(ExpectedConditions.elementToBeClickable(moreProductsButton));
+        for(int i=0;i<count;i++){Thread.sleep(5000);
+            new WebDriverWait(driver, 3000).until(ExpectedConditions.elementToBeClickable(moreProductsButton));
             moreProductsButton.click();
         }
     }
