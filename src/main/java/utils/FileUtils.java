@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.List;
 
 public class FileUtils {
-    public static File writeProductToFile(List<Product> products) throws IOException {
+    public static File writeProductToTXTFile(List<Product> products) throws IOException {
         File file = new File("temp.txt");
         FileWriter fileWriter  = new FileWriter(file);
         file.setWritable(true);

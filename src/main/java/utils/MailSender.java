@@ -13,8 +13,8 @@ import javax.mail.internet.*;
 
 public class MailSender {
 
-    private String header = "Rozetka Test";
-    private String text = "Describe Rozetka product";
+    private static String header = "Rozetka Test";
+    private static String text = "Describe Rozetka product";
 
 
 
@@ -35,7 +35,7 @@ public class MailSender {
     }
 
 
-    private List<String> getEmailsList() throws IOException {
+    private static List<String> getEmailsList() throws IOException {
         List<String> emails = new ArrayList<String>();
         FileInputStream fstream = new FileInputStream(ClassLoader.getSystemClassLoader().getResource("emails.txt").getPath());
         BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
@@ -50,7 +50,7 @@ public class MailSender {
         return emails;
     }
 
-    public void sendMail(File sendFile) throws IOException, MessagingException {
+    public static void sendMail(File sendFile) throws IOException, MessagingException {
         final String username = "frolovtest2017";
         final String password = "Froyman98_!";
 

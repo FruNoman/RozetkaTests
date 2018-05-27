@@ -49,9 +49,8 @@ public class BaseTest {
 
     @AfterClass
     public void tearDown() throws IOException, MessagingException {
-        File describeFile=FileUtils.writeProductToFile(products);
-        MailSender mailSender = new MailSender();
-        mailSender.sendMail(describeFile);
+        File describeFile=FileUtils.writeProductToTXTFile(products);
+        MailSender.sendMail(describeFile);
         driver.close();
     }
 }
