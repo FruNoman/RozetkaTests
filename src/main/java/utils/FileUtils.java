@@ -1,10 +1,10 @@
 package utils;
 
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import products.Product;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.List;
 
 public class FileUtils {
@@ -20,5 +20,48 @@ public class FileUtils {
         }
         fileWriter.flush();
         return file;
+    }
+
+    public static File writeProductToEXCELFile(List<Product> products) throws IOException {
+        String[] columns = {"Name", "Price", "Popular"};
+        Workbook workbook = new XSSFWorkbook(); // new HSSFWorkbook() for generating `.xls` file
+
+        CreationHelper createHelper = workbook.getCreationHelper();
+
+        Sheet sheet = workbook.createSheet("Employee");
+
+        Row headerRow = sheet.createRow(0);
+
+        for(int i = 0; i < columns.length; i++) {
+            Cell cell = headerRow.createCell(i);
+            cell.setCellValue(columns[i]);
+        }
+
+        int rowNum = 1;
+        for(Product product: products) {
+            Row row = sheet.createRow(rowNum++);
+
+            row.createCell(0)
+                    .setCellValue(product.getName());
+
+            row.createCell(1)
+                    .setCellValue(product.getPrice());
+
+            row.createCell(2)
+                    .setCellValue(product.getPopular());
+
+        }
+
+        for(int i = 0; i < columns.length; i++) {
+            sheet.autoSizeColumn(i);
+        }
+
+        File xlsxFile=new File("temp.xlsx");
+        FileOutputStream fileOut = new FileOutputStream(xlsxFile);
+        workbook.write(fileOut);
+        fileOut.close();
+
+        workbook.close();
+        return xlsxFile;
     }
 }
