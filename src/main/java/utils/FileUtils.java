@@ -1,7 +1,11 @@
 package utils;
 
+import db.AppConfig;
+import db.entities.ProductEntitty;
+import db.service.ProductService;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import products.Product;
 import products.Smartphone;
 
@@ -63,5 +67,17 @@ public class FileUtils {
 
         workbook.close();
         return xlsxFile;
+    }
+
+    public static void saveProductsToDB(List<Product> products){
+        AnnotationConfigApplicationContext context =
+                new AnnotationConfigApplicationContext(AppConfig.class);
+
+        ProductService productService = context.getBean(ProductService.class);
+        for(Product product:products){
+            productService.add(new ProductEntitty( product.getName(), product.getPrice()));
+        }
+
+        context.close();
     }
 }
