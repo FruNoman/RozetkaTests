@@ -36,19 +36,43 @@ public class SubCategoryPage extends BasePage {
     }
 
     public void clickOnMoreButton(int count) throws InterruptedException {
-        for(int i=0;i<count;i++){Thread.sleep(5000);
-            new WebDriverWait(driver, 3000).until(ExpectedConditions.elementToBeClickable(moreProductsButton));
+        for(int i=0;i<count;i++){
+            Thread.sleep(7000);
+            waitForElementIsClickable(moreProductsButton);
             moreProductsButton.click();
         }
     }
 
     public List<Product> collectAllProducts(){
         products = new ArrayList<Product>();
+        waitForElements(productsElements);
         for(WebElement element:productsElements){
             Product product = new Smartphone();
             product.setName(element.findElement(By.cssSelector(".g-i-tile-i-title>a")).getText());
             product.setPrice(RozetkaUtils.formatPriceToInteger(element.findElement(By.cssSelector(".g-price-uah")).getText()));
+            try{
+                element.findElement(By.className("g-tag-icon-middle-popularity"));
+                product.setPopular(true);
+            }catch (Exception e){
+            }
             products.add(product);
+        }
+        return products;
+    }
+
+    public List<Product> collectPopularProducts(){
+        products = new ArrayList<Product>();
+        waitForElements(productsElements);
+        for(WebElement element:productsElements){
+            Product product = new Smartphone();
+            product.setName(element.findElement(By.cssSelector(".g-i-tile-i-title>a")).getText());
+            product.setPrice(RozetkaUtils.formatPriceToInteger(element.findElement(By.cssSelector(".g-price-uah")).getText()));
+            try{
+                element.findElement(By.className("g-tag-icon-middle-popularity"));
+                product.setPopular(true);
+                products.add(product);
+            }catch (Exception e){
+            }
         }
         return products;
     }

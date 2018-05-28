@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
+
 import java.util.List;
 
 public class MainPage extends BasePage {
@@ -23,6 +24,7 @@ public class MainPage extends BasePage {
 
 
     public void hoverOnCategory(Categories category) {
+        waitForElements(mainCategories);
         for(WebElement element:mainCategories){
             if(element.getText().equals(category.toString())){
                 Actions actions = new Actions(driver);
@@ -33,6 +35,7 @@ public class MainPage extends BasePage {
     }
 
     public void clickOnCategory(Categories category) {
+        waitForElements(mainCategories);
         for(WebElement element:mainCategories){
             if(element.getText().equals(category.toString())){
                 element.click();
@@ -42,6 +45,7 @@ public class MainPage extends BasePage {
     }
 
     public void clickOnSubCategory(SubCategories subCategory){
+        waitForElements(subCategories);
         for(WebElement element:subCategories){
             if((element.getText()).trim().equals(subCategory.toString())){
                 element.click();

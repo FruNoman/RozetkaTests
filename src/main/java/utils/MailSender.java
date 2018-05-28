@@ -50,7 +50,8 @@ public class MailSender {
         return emails;
     }
 
-    public static void sendMail(File sendFile) throws IOException, MessagingException {
+
+    public static void sendMail(List<File> sendFiles) throws IOException, MessagingException {
         final String username = "frolovtest2017";
         final String password = "Froyman98_!";
 
@@ -73,18 +74,18 @@ public class MailSender {
                 message.setSubject(header);
                 message.setText(text);
 
-                MimeBodyPart messageBodyPart = new MimeBodyPart();
-
                 Multipart multipart = new MimeMultipart();
 
-                String file = sendFile.getAbsolutePath();
-                String fileName = sendFile.getName();
-                DataSource source = new FileDataSource(file);
-                messageBodyPart.setDataHandler(new DataHandler(source));
-                messageBodyPart.setFileName(fileName);
-                multipart.addBodyPart(messageBodyPart);
-
-                message.setContent(multipart);
+                for(File sendFile:sendFiles) {
+                    MimeBodyPart messageBodyPart = new MimeBodyPart();
+                    String file = sendFile.getAbsolutePath();
+                    String fileName = sendFile.getName();
+                    DataSource source = new FileDataSource(file);
+                    messageBodyPart.setDataHandler(new DataHandler(source));
+                    messageBodyPart.setFileName(fileName);
+                    multipart.addBodyPart(messageBodyPart);
+                    message.setContent(multipart);
+                }
 
                 Transport.send(message);
             }

@@ -6,6 +6,8 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.List;
+
 
 public abstract class BasePage {
     private WebDriver driver;
@@ -17,15 +19,19 @@ public abstract class BasePage {
     }
 
     public void waitForElement(WebElement element) {
-            new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOf(element));
+            new WebDriverWait(driver, 10000).until(ExpectedConditions.visibilityOf(element));
     }
 
     public void waitForElementStaleness(WebElement element) {
-            new WebDriverWait(driver, 10).until(ExpectedConditions.stalenessOf(element));
+            new WebDriverWait(driver, 10000).until(ExpectedConditions.stalenessOf(element));
     }
 
     public void waitForElementIsClickable(WebElement element){
-        new WebDriverWait(driver,10).until(ExpectedConditions.elementToBeClickable(element));
+        new WebDriverWait(driver,10000).until(ExpectedConditions.elementToBeClickable(element));
+    }
+
+    public void waitForElements(List<WebElement> elements){
+        new WebDriverWait(driver,10000).until(ExpectedConditions.visibilityOfAllElements(elements));
     }
 
 

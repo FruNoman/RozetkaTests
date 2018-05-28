@@ -6,14 +6,12 @@ import products.Product;
 import products.Smartphone;
 
 import java.io.*;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 public class FileUtils {
     public static File writeProductToTXTFile(List<Product> products) throws IOException {
-        File file = new File("temp.txt");
+        Date date = new Date();
+        File file=new File("temp"+date.getTime()+".txt");
         FileWriter fileWriter  = new FileWriter(file);
         file.setWritable(true);
         file.setReadable(true);
@@ -27,11 +25,9 @@ public class FileUtils {
 
     public static File writeProductToEXCELFile(List<Product> products) throws IOException {
         String[] columns = {"Name", "Price", "Popular"};
-        Workbook workbook = new XSSFWorkbook(); // new HSSFWorkbook() for generating `.xls` file
+        Workbook workbook = new XSSFWorkbook();
 
-        CreationHelper createHelper = workbook.getCreationHelper();
-
-        Sheet sheet = workbook.createSheet("Employee");
+        Sheet sheet = workbook.createSheet("Products");
 
         Row headerRow = sheet.createRow(0);
 
@@ -59,8 +55,8 @@ public class FileUtils {
         for(int i = 0; i < columns.length; i++) {
             sheet.autoSizeColumn(i);
         }
-
-        File xlsxFile=new File("temp.xlsx");
+        Date date = new Date();
+        File xlsxFile=new File("temp"+date.getTime()+".xlsx");
         FileOutputStream fileOut = new FileOutputStream(xlsxFile);
         workbook.write(fileOut);
         fileOut.close();

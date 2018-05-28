@@ -18,7 +18,7 @@ public class BaseTest {
         DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
         driver = new ChromeDriver(desiredCapabilities);
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+//        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
 
     @BeforeMethod

@@ -10,6 +10,8 @@ import utils.MailSender;
 import javax.mail.MessagingException;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FirstTest extends BaseTest{
 
@@ -26,7 +28,9 @@ public class FirstTest extends BaseTest{
     @AfterMethod
     public void mailSend() throws IOException, MessagingException {
         File describeFile= FileUtils.writeProductToTXTFile(products);
-        MailSender.sendMail(describeFile);
+        List<File> filesForSend = new ArrayList<>();
+        filesForSend.add(describeFile);
+        MailSender.sendMail(filesForSend);
     }
 
 }
