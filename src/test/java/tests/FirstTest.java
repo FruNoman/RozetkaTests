@@ -1,3 +1,5 @@
+package tests;
+
 import enums.Categories;
 import enums.SubCategories;
 import org.testng.annotations.AfterMethod;
@@ -14,33 +16,25 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ThirdTest  extends BaseTest{
-    private List<Product> popularProducts;
+public class FirstTest extends BaseTest{
     private List<Product> products;
 
     @Test
-    public void testThree() throws InterruptedException {
+    public void testOne() throws InterruptedException {
         MainPage mainPage = new MainPage(driver);
         mainPage.hoverOnCategory(Categories.SMARTPHONES_AND_TV);
         mainPage.clickOnSubCategory(SubCategories.SMARTPHONES);
         SubCategoryPage subCategoryPage = new SubCategoryPage(driver);
-        subCategoryPage.clickOnMoreButton(2);
-        popularProducts=subCategoryPage.collectPopularProducts();
-        subCategoryPage.setMaximumPrice(6000);
-        subCategoryPage.submitPrice();
-        subCategoryPage.setMinimalPrice(3000);
-        subCategoryPage.submitPrice();
-        subCategoryPage.clickOnMoreButton(4);
+        subCategoryPage.clickOnMoreButton(3);
         products=subCategoryPage.collectAllProducts();
     }
 
     @AfterMethod
     public void mailSend() throws IOException, MessagingException {
-        File all= FileUtils.writeProductToEXCELFile(products);
-        File popular = FileUtils.writeProductToEXCELFile(popularProducts);
+        File describeFile= FileUtils.writeProductToTXTFile(products);
         List<File> filesForSend = new ArrayList<>();
-        filesForSend.add(all);
-        filesForSend.add(popular);
+        filesForSend.add(describeFile);
         MailSender.sendMail(filesForSend);
     }
+
 }

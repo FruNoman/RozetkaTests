@@ -1,3 +1,5 @@
+package tests;
+
 import enums.Categories;
 import enums.SubCategories;
 import enums.SubCategoriesHeaders;
