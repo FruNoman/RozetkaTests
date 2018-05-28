@@ -15,7 +15,7 @@ public class BaseTest {
 
     @BeforeClass
     public void init(){
-        System.setProperty("webdriver.chrome.driver", "/Users/Admin/Downloads/chromedriver");
+//        System.setProperty("webdriver.chrome.driver", "/Users/Admin/Downloads/chromedriver");
         DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
         driver = new ChromeDriver(desiredCapabilities);
         driver.manage().window().maximize();
