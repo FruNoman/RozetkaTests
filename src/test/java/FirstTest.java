@@ -4,6 +4,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 import pages.MainPage;
 import pages.SubCategoryPage;
+import products.Product;
 import utils.FileUtils;
 import utils.MailSender;
 
@@ -14,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FirstTest extends BaseTest{
+    private List<Product> products;
 
     @Test
     public void testOne() throws InterruptedException {

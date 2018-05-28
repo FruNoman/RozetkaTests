@@ -16,6 +16,7 @@ import java.util.List;
 
 public class ThirdTest  extends BaseTest{
     private List<Product> popularProducts;
+    private List<Product> products;
 
     @Test
     public void testThree() throws InterruptedException {

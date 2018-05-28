@@ -2,6 +2,7 @@ package pages;
 
 import enums.Categories;
 import enums.SubCategories;
+import enums.SubCategoriesHeaders;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -16,6 +17,8 @@ public class MainPage extends BasePage {
     private List<WebElement> mainCategories;
     @FindBy(css = "li.f-menu-sub-l-i>a")
     private List<WebElement> subCategories;
+    @FindBy(css = ".f-menu-sub>a")
+    private List<WebElement> subCategoriesHeaders;
 
     public MainPage(WebDriver driver) {
         super(driver);
@@ -48,6 +51,16 @@ public class MainPage extends BasePage {
         waitForElements(subCategories);
         for(WebElement element:subCategories){
             if((element.getText()).trim().equals(subCategory.toString())){
+                element.click();
+                break;
+            }
+        }
+    }
+
+    public void clickOnSubCategoryHeader(SubCategoriesHeaders subCategoryheader){
+        waitForElements(subCategoriesHeaders);
+        for(WebElement element:subCategoriesHeaders){
+            if((element.getText()).trim().equals(subCategoryheader.toString())){
                 element.click();
                 break;
             }

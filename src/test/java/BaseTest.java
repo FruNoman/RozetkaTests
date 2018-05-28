@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit;
 
 public class BaseTest {
     protected WebDriver driver;
-    protected List<Product> products;
+
 
     @BeforeClass
     public void init(){
