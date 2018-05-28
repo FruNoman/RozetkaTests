@@ -78,7 +78,7 @@ public class MailSender {
                 Multipart multipart = new MimeMultipart();
 
                 String file = sendFile.getAbsolutePath();
-                String fileName = "products";
+                String fileName = sendFile.getName();
                 DataSource source = new FileDataSource(file);
                 messageBodyPart.setDataHandler(new DataHandler(source));
                 messageBodyPart.setFileName(fileName);

@@ -36,6 +36,8 @@ public class Smartphone implements Product,Comparable<Smartphone> {
 
     @Override
     public int compareTo(Smartphone o) {
-        return 0;
+        int price = ((Smartphone) o).getPrice();
+
+        return this.price - price;
     }
 }

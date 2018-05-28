@@ -3,8 +3,12 @@ package utils;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import products.Product;
+import products.Smartphone;
 
 import java.io.*;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class FileUtils {
@@ -13,7 +17,6 @@ public class FileUtils {
         FileWriter fileWriter  = new FileWriter(file);
         file.setWritable(true);
         file.setReadable(true);
-        System.out.println(file.getAbsolutePath());
         for(Product pro:products){
             System.out.println(pro);
             fileWriter.write(pro.toString()+"\n");
@@ -38,6 +41,7 @@ public class FileUtils {
         }
 
         int rowNum = 1;
+        products.sort(Comparator.comparingInt(Product::getPrice).reversed());
         for(Product product: products) {
             Row row = sheet.createRow(rowNum++);
 

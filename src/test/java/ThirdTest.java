@@ -22,7 +22,7 @@ public class ThirdTest  extends BaseTest{
         subCategoryPage.submitPrice();
         subCategoryPage.setMinimalPrice(3000);
         subCategoryPage.submitPrice();
-//        subCategoryPage.clickOnMoreButton(5);
+        subCategoryPage.clickOnMoreButton(5);
         products=subCategoryPage.collectAllProducts();
     }
 

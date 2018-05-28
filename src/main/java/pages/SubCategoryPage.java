@@ -53,7 +53,7 @@ public class SubCategoryPage extends BasePage {
         return products;
     }
 
-    public void setMinimalPrice(int price) throws InterruptedException {
+    public void setMinimalPrice(int price) {
         waitForElementIsClickable(minimalPrice);
         minimalPrice.clear();
         minimalPrice.sendKeys(String.valueOf(price));
