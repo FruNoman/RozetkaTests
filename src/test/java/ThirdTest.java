@@ -18,7 +18,11 @@ public class ThirdTest  extends BaseTest{
         mainPage.hoverOnCategory(Categories.SMARTPHONES_AND_TV);
         mainPage.clickOnSubCategory(SubCategories.SMARTPHONES);
         SubCategoryPage subCategoryPage = new SubCategoryPage(driver);
-        subCategoryPage.clickOnMoreButton(5);
+        subCategoryPage.setMaximumPrice(6000);
+        subCategoryPage.submitPrice();
+        subCategoryPage.setMinimalPrice(3000);
+        subCategoryPage.submitPrice();
+//        subCategoryPage.clickOnMoreButton(5);
         products=subCategoryPage.collectAllProducts();
     }
 

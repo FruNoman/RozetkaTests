@@ -1,8 +1,8 @@
 package products;
 
-public class Smartphone implements Product {
+public class Smartphone implements Product,Comparable<Smartphone> {
     private String name;
-    private String price;
+    private int price;
     private boolean popular;
 
     public void setName(String name) {
@@ -13,11 +13,11 @@ public class Smartphone implements Product {
         return name;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(int price) {
         this.price=price;
     }
 
-    public String getPrice() {
+    public int getPrice() {
         return price;
     }
 
@@ -32,5 +32,10 @@ public class Smartphone implements Product {
     @Override
     public String toString() {
         return "Smartphone: "+name+" | Price: "+price+" | Popular: "+popular;
+    }
+
+    @Override
+    public int compareTo(Smartphone o) {
+        return 0;
     }
 }
